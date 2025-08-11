@@ -1,0 +1,2 @@
+var myName = "Alex Johnson";
+console.log("Task 1 - Name:", myName);
