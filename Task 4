@@ -1,2 +1,2 @@
-let isStudent = Number(myAge) < 25;
+let isStudent = Number(myAge) < 22;
 console.log("Task 4 - Is student?", isStudent);
