@@ -1,0 +1,10 @@
+let person = {
+  name: myName,
+  age: myAge,
+  education: {
+    isStudent: isStudent,
+    school: "University of Tech"
+  },
+  hobbies: ["coding", "music", "hiking"]
+};
+console.log("Task 5 - Person object:", person);
