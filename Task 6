@@ -1,2 +1,0 @@
-let colors = ["red", "blue", "green", "yellow", "blue", "red"];
-console.log("Task 6 - Colors array:", colors);
