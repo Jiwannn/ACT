@@ -1,3 +1,7 @@
+let myName = "Jay"; 
+let myAge = 22;  
+let isStudent = myAge < 25;
+
 let person = {
   name: myName,
   age: myAge,
