@@ -11,4 +11,4 @@ let person = {
   },
   hobbies: ["coding", "music", "hiking"]
 };
-console.log("Task 5 - Person object:", person);
+console.log("Person object:", person);
