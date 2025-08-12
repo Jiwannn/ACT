@@ -9,4 +9,4 @@ for (let num of numbers) {
   }
 }
 
-console.log(`Challenge 2 - Found ${count} numbers: [${filteredNumbers}]`);
+console.log(`Found ${count} numbers: [${filteredNumbers}]`);
