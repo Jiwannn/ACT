@@ -1,2 +1,2 @@
 var myName = "Jarnel Alngog";
-console.log("Task 1 - Name:", myName);
+console.log("Name: ", myName);
