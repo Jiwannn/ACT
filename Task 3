@@ -1,7 +1,7 @@
 const PI = 3.1416;
-console.log("Task 3 - Original PI:", PI);
+console.log("Original PI:", PI);
 try {
   PI = 3.14;
 } catch (error) {
-  console.error("Task 3 - Error:", error.message);
+  console.error("Error:", error.message);
 }
