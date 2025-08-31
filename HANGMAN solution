@@ -1,0 +1,102 @@
+import promp from "./promp.js";
+import data from "./data.js";
+
+
+const word = data[Math.floor(Math.random() * data.length)];
+
+async function runGame() {
+    const maxAttempts = 6;
+    let attempts = 0;
+    let guessedLetters = new Set();
+    let revealedWord = Array(word.word.length).fill('_');
+    let gameOver = false;
+
+    console.log(`\n${word.question}`);
+    console.log(`Word to guess: ${revealedWord.join(' ')}`);
+    console.log(`You have ${maxAttempts} attempts.`);
+
+    while (attempts < maxAttempts && !gameOver) {
+        const guess = await promp(`\nEnter a letter or guess the whole word: `);
+        const lowerGuess = guess.toLowerCase().trim();
+
+        
+        if (lowerGuess.length > 1) {
+            if (lowerGuess === word.word.toLowerCase()) {
+                console.log(`\n Congratulations! You've guessed the word "${word.word}" correctly!`);
+                gameOver = true;
+                break;
+            } else {
+                attempts++;
+                console.log(`\n Incorrect word guess! Attempts remaining: ${maxAttempts - attempts}`);
+                if (attempts === maxAttempts - 1) {
+                    console.log(` Hint: ${word.hint}`);
+                }
+                continue;
+            }
+        }
+
+        
+        if (lowerGuess.length !== 1 || !/[a-z]/.test(lowerGuess)) {
+            console.log(`\n  Please enter a valid single letter.`);
+            continue;
+        }
+
+        if (guessedLetters.has(lowerGuess)) {
+            console.log(`\n You already guessed the letter "${lowerGuess}". Try a different one.`);
+            continue;
+        }
+
+        guessedLetters.add(lowerGuess);
+
+        
+        if (word.word.toLowerCase().includes(lowerGuess)) {
+           
+            for (let i = 0; i < word.word.length; i++) {
+                if (word.word[i].toLowerCase() === lowerGuess) {
+                    revealedWord[i] = word.word[i];
+                }
+            }
+            
+            console.log(`\n Correct! The letter "${lowerGuess}" is in the word.`);
+            console.log(`Current progress: ${revealedWord.join(' ')}`);
+            
+            
+            if (!revealedWord.includes('_')) {
+                console.log(`\n Congratulations! You've guessed the word "${word.word}" correctly!`);
+                gameOver = true;
+            }
+        } else {
+            attempts++;
+            console.log(`\n Wrong! The letter "${lowerGuess}" is not in the word.`);
+            console.log(`Attempts remaining: ${maxAttempts - attempts}`);
+            console.log(`Current progress: ${revealedWord.join(' ')}`);
+            
+           
+            if (attempts === maxAttempts - 1) {
+                console.log(` Hint: ${word.hint}`);
+            }
+        }
+    }
+
+    
+    if (attempts >= maxAttempts) {
+        console.log(`\n Game over! You ran out of attempts.`);
+        console.log(`The word was: "${word.word}"`);
+        console.log(`Meaning: ${word.hint}`);
+    }
+
+   
+    const playAgain = await promp(`\nWould you like to play again? (y/n): `);
+    if (playAgain.toLowerCase() === 'y') {
+        console.clear();
+        const newWord = data[Math.floor(Math.random() * data.length)];
+        word.word = newWord.word;
+        word.hint = newWord.hint;
+        word.question = newWord.question;
+        runGame();
+    } else {
+        console.log(`\nThanks for playing! Goodbye!`);
+    }
+}
+
+runGame();
